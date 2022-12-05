@@ -33,12 +33,11 @@ namespace Aworkplace.Models
         {
             string lastLine = File.ReadLines("../../../Files/Readers.txt").Last();
             string[] ident = lastLine.Split(' ');
-            string reader = (Convert.ToInt32(ident[0]) + 1).ToString() + " " + LastName + " " + FirstName + " " + Patronomyc + " " + DateBirth.ToString() + " " + identificatorType.ToString() + " " + typeObject;
+            string reader = "\n" + ID.ToString() + " " + IDReaderCard.ToString() + " " + LastName + " " + FirstName + " " + Patronomyc + " " + DateBirth.Value.ToShortDateString() + " " + identificatorType.ToString() + " " + typeObject;
             File.AppendAllText("../../../Files/Readers.txt", reader);
         }
         public override void UpdateReader()
         {
-            string findstring = "";
             string[] allReader = File.ReadAllLines("../../../Files/Readers.txt");
 
             for (int i = 0; i < allReader.Length; i++)
@@ -46,7 +45,7 @@ namespace Aworkplace.Models
                 string[] line = allReader[0].Split(' ');
                 if (this.ID == Convert.ToInt32(line[0]))
                 {
-                    allReader[i] = ID.ToString() + " " + LastName + " " + FirstName + " " + Patronomyc + " " + DateBirth.ToString() + " "+identificatorType.ToString() + " " + typeObject;
+                    allReader[i] = "\n" + ID.ToString() + " " + IDReaderCard.ToString() + " " + LastName + " " + FirstName + " " + Patronomyc + " " + DateBirth.Value.ToShortDateString() + " "+identificatorType.ToString() + " " + typeObject;
                 }
             }
             File.WriteAllLines("../../../Files/Readers.txt", allReader);

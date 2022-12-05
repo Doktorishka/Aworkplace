@@ -7,6 +7,12 @@ namespace Aworkplace.Views
         public registerReader()
         {
             InitializeComponent();
+            string[] allType = File.ReadAllLines("../../../Files/TypeReader.txt");
+            foreach (string type in allType)
+            {
+                string[] objectType = type.Split(" ");
+                typeReader.Items.Add(objectType[1]);
+            }
         }
 
         private bool isValidation()
@@ -41,10 +47,21 @@ namespace Aworkplace.Views
                 {
                     try {
                         Reader reader = new Reader();
+                        string idre = "";
+
+                        reader.ID = reader.getLastIndex() + 1;
+
+                        idre += DateTime.Now.Year.ToString();
+                        idre += DateTime.Now.Month.ToString();
+                        idre += DateTime.Now.Day.ToString();
+                        idre += reader.ID.ToString();
+
+                        reader.IDReaderCard = Convert.ToInt32(idre);
+
                         reader.LastName = lastNameReader.Text.Replace(" ", "");
                         reader.FirstName = firstNameReader.Text.Replace(" ", "");
                         reader.DateBirth = dateBirthReader.Value;
-                        reader.ID = reader.getLastIndex() + 1;
+                        
                         if (patronomycReader.Text == null ||
                             patronomycReader.Text == String.Empty ||
                             patronomycReader.Text == "")
@@ -66,10 +83,20 @@ namespace Aworkplace.Views
                 {
                     try{
                         TypeReader reader = new TypeReader();
+                        string idre = "";
+                        reader.ID = reader.getLastIndex() + 1;
+
+                        idre += DateTime.Now.Year.ToString();
+                        idre += DateTime.Now.Month.ToString();
+                        idre += DateTime.Now.Day.ToString();
+                        idre += reader.ID.ToString();
+
+                        reader.IDReaderCard = Convert.ToInt32(idre);
+
                         reader.LastName = lastNameReader.Text.Replace(" ", "");
                         reader.FirstName = firstNameReader.Text.Replace(" ", ""); ;
                         reader.DateBirth = dateBirthReader.Value;
-                        reader.ID = reader.getLastIndex() + 1;
+                        
                         if (patronomycReader.Text == null ||
                             patronomycReader.Text == String.Empty ||
                             patronomycReader.Text == "")

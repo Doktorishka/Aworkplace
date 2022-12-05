@@ -49,7 +49,7 @@ namespace Aworkplace.Models
         {
             string lastLine = File.ReadLines("../../../Files/Readers.txt").Last();
             string[] ident = lastLine.Split(' ');
-            string reader = (Convert.ToInt32(ident[0]) + 1).ToString() + " " + IDReaderCard.ToString() + " " + lastName + " " + firstName + " " + patronomyc + " " + dateBirth.ToString() + " 0 undefine";
+            string reader = ("\n" + ID.ToString() + " " + IDReaderCard.ToString() + " " + lastName + " " + firstName + " " + patronomyc + " " + dateBirth.Value.ToShortDateString() + " 0 undefine");
             File.AppendAllText("../../../Files/Readers.txt", reader);
         }
 
@@ -87,7 +87,7 @@ namespace Aworkplace.Models
             for (int i = 0; i < allReader.Length; i++) {
                 string[] line = allReader[0].Split(' ');
                 if (id == Convert.ToInt32(line[0])) {
-                    allReader[i] = id.ToString() + " " + lastName + " " + firstName + " " + patronomyc + " " + dateBirth.ToString() + " 0 undefine";
+                    allReader[i] = id.ToString() + " " + lastName + " " + firstName + " " + patronomyc + " " + dateBirth.Value.ToShortDateString() + " 0 undefine";
                 }
             }
             File.WriteAllLines("../../../Files/Readers.txt", allReader);
