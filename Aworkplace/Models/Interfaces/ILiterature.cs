@@ -11,5 +11,6 @@ namespace Aworkplace.Models.Interfaces
         void AddLiterature();
         void DeleteLiterature();
         void UpdateLiterature();
+        int getLastId();
     }
 }

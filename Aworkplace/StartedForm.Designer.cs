@@ -68,6 +68,7 @@
             this.listingBookFromButton.TabIndex = 0;
             this.listingBookFromButton.Text = "Список экземпляров";
             this.listingBookFromButton.UseVisualStyleBackColor = true;
+            this.listingBookFromButton.Click += new System.EventHandler(this.listingBookFromButton_Click);
             // 
             // usedBookFromButton
             // 
@@ -97,6 +98,7 @@
             this.registerBookFromButton.TabIndex = 0;
             this.registerBookFromButton.Text = "Регистрация экземпляра";
             this.registerBookFromButton.UseVisualStyleBackColor = false;
+            this.registerBookFromButton.Click += new System.EventHandler(this.registerBookFromButton_Click);
             // 
             // readerGroupBox
             // 

@@ -26,5 +26,19 @@ namespace Aworkplace
 
             lr.Show();
         }
+
+        private void registerBookFromButton_Click(object sender, EventArgs e)
+        {
+            registerLiterature rl = new registerLiterature();
+
+            rl.Show();
+        }
+
+        private void listingBookFromButton_Click(object sender, EventArgs e)
+        {
+            listLiterature ll = new listLiterature();
+
+            ll.Show();
+        }
     }
 }

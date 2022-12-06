@@ -126,8 +126,6 @@ namespace Aworkplace.Views
         {
             if (dataReaders.SelectedCells[0].RowIndex != -1)
             {
-                int id = dataReaders.SelectedCells[0].RowIndex;
-                
                 allReaders[dataReaders.SelectedCells[0].RowIndex].DeleteReader();
                 readFromFileForData();
             }

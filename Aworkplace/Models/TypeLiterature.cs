@@ -5,21 +5,21 @@
         private int idType { get; set; }
         private string nameType { get; set; }
         private string? whoisAutorPrint { get; set; }
-        private DateTime? dateOutputLiterature { get; set; }
-        private int? numInstance { get; set; }
 
 
-        public int IdType { get => idType; set => value = idType; }
-        public string? NameType { get => nameType; set => value = nameType; }
-        public string? WhoisAutorPrint { get => whoisAutorPrint; set => value = whoisAutorPrint; }
-        public DateTime? DateOutput { get => dateOutputLiterature; set => value = dateOutputLiterature; }
-        public int? COUNT { get => numInstance; set => value = numInstance; }
+        public int IdType { get => idType; set => idType = value; }
+        public string? NameType { get => nameType; set => nameType = value; }
+        public string? WhoisAutorPrint { get => whoisAutorPrint; set =>  whoisAutorPrint = value; }
+       
 
         public TypeLiterature():base() { }
 
         public override void AddLiterature()
         {
-            throw new NotImplementedException();
+            string lastLine = File.ReadLines("../../../Files/Literature.txt").Last();
+            string[] ident = lastLine.Split(' ');
+            string literature = "\n" + (Convert.ToInt32(ident[0]) + 1).ToString() + " " + Author + " " + Title + " " + COUNT.ToString() + " " + DateOutput.ToString() + " " + idType.ToString() + " " + WhoisAutorPrint;
+            File.AppendAllText("../../../Files/Literature.txt", literature);
         }
 
         public override void UpdateLiterature()
@@ -31,7 +31,7 @@
                 string[] line = allReader[0].Split(' ');
                 if (ID == Convert.ToInt32(line[0]))
                 {
-                    allReader[i] = ID.ToString() + " " + Author + " " + Title + " " + idType.ToString() + " " + nameType + " " + whoisAutorPrint + " " + dateOutputLiterature.ToString() + " " + numInstance.ToString();
+                    allReader[i] = "\n" + ID.ToString() + " " + Author + " " + Title + " " + COUNT.ToString() + " " + DateOutput.ToString() + " " + idType.ToString() + " " + WhoisAutorPrint;
                 }
             }
             File.WriteAllLines("../../../Files/Literature.txt", allReader);
