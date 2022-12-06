@@ -40,5 +40,11 @@ namespace Aworkplace
 
             ll.Show();
         }
+
+        private void issueBookFormButton_Click(object sender, EventArgs e)
+        {
+            outputLiteratureForReader outputLiteratureForReader = new outputLiteratureForReader();
+            outputLiteratureForReader.Show();
+        }
     }
 }

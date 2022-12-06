@@ -169,6 +169,7 @@
             this.issueBookFormButton.TabIndex = 0;
             this.issueBookFormButton.Text = "Выдать книгу";
             this.issueBookFormButton.UseVisualStyleBackColor = true;
+            this.issueBookFormButton.Click += new System.EventHandler(this.issueBookFormButton_Click);
             // 
             // acceptBookFormButton
             // 
