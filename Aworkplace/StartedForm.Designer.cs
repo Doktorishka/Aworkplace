@@ -140,6 +140,7 @@
             this.listingDebtorFromButton.TabIndex = 0;
             this.listingDebtorFromButton.Text = "Список должников";
             this.listingDebtorFromButton.UseVisualStyleBackColor = true;
+            this.listingDebtorFromButton.Click += new System.EventHandler(this.listingDebtorFromButton_Click);
             // 
             // registerReaderFromButton
             // 
@@ -184,6 +185,7 @@
             this.acceptBookFormButton.TabIndex = 0;
             this.acceptBookFormButton.Text = "Принять книгу";
             this.acceptBookFormButton.UseVisualStyleBackColor = true;
+            this.acceptBookFormButton.Click += new System.EventHandler(this.acceptBookFormButton_Click);
             // 
             // titleMainForm
             // 

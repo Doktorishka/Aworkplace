@@ -1,15 +1,5 @@
 ﻿using Aworkplace.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Aworkplace.Views
 {
@@ -42,12 +32,12 @@ namespace Aworkplace.Views
 
         public static Task<object> GetTaskFromEvent(object o, string evt)
         {
-            if (o == null || evt == null) throw new ArgumentNullException("Arguments cannot be null");
+            if (o == null || evt == null) throw new ArgumentNullException("Аргумент имеет значения null");
 
             EventInfo einfo = o.GetType().GetEvent(evt);
             if (einfo == null)
             {
-                throw new ArgumentException(String.Format("*{0}* has no *{1}* event", o, evt));
+                throw new ArgumentException(String.Format("У объекта *{0}* нет событий *{1}* ", o, evt));
             }
 
             TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
@@ -106,7 +96,6 @@ namespace Aworkplace.Views
                 dataReaders.Rows[i].Cells[5].Value = allReaders[i].TypeObject;
                 dataReaders.Rows[i].HeaderCell.Value = allReaders[i].IDReaderCard.ToString();
             }
-
         }
 
         private async void addReaderButton_Click(object sender, EventArgs e)

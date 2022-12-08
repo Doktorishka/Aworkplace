@@ -1,14 +1,4 @@
 ﻿using Aworkplace.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Aworkplace.Views
 {
@@ -42,6 +32,12 @@ namespace Aworkplace.Views
         }
 
         private void readFromFileForData() {
+
+            allLiteratures.Clear();
+            allReaders.Clear();
+            dataReaders.Rows.Clear();
+            dataLiterature.Rows.Clear();
+
             string[] allLiterature = File.ReadAllLines("../../../Files/Literature.txt");
             foreach (string literString in allLiterature)
             {
@@ -53,7 +49,10 @@ namespace Aworkplace.Views
                 tl.Title = line[1];
                 tl.Author = line[2];
                 tl.COUNT = Convert.ToInt32(line[3]);
+                tl.DateOutput = Convert.ToDateTime(line[4]);
+                tl.ID = Convert.ToInt32(line[5]);
                 tl.NameType = typeLiterature.FirstOrDefault(x => x.Key == Convert.ToInt32(line[5])).Value;
+                tl.WhoisAutorPrint = line[6];
 
                 allLiteratures.Add(tl);
             }
@@ -91,8 +90,6 @@ namespace Aworkplace.Views
             for (int i = 0; i < dataReaders.RowCount; i++)
             {
                 string fio = allReaders[i].LastName + " " + allReaders[i].FirstName + " " + allReaders[i].Patronomyc;
-
-
                 dataReaders.Rows[i].Cells[0].Value = fio;
                 dataReaders.Rows[i].HeaderCell.Value = allReaders[i].IDReaderCard.ToString();
             }
@@ -100,10 +97,26 @@ namespace Aworkplace.Views
 
         private void registerOutputButton_Click(object sender, EventArgs e)
         {
+
+
             if (dataReaders.SelectedCells[0].RowIndex != -1 && dataLiterature.SelectedCells[0].RowIndex != -1)
             {
-                string outputLiterature = "\n" + allLiteratures[dataLiterature.SelectedCells[0].RowIndex].ID.ToString() + " " + allReaders[dataReaders.SelectedCells[0].RowIndex].IDReaderCard.ToString() + " " + dateOutputLiterature.Value.ToShortDateString();
-                File.AppendAllText("../../../Files/OutputLiterature.txt", outputLiterature);
+                if (allLiteratures[dataLiterature.SelectedCells[0].RowIndex].COUNT != 0)
+                {
+                    string outputLiterature = "\n" + allLiteratures[dataLiterature.SelectedCells[0].RowIndex].ID.ToString() + " " + allReaders[dataReaders.SelectedCells[0].RowIndex].IDReaderCard.ToString() + " " + dateOutputLiterature.Value.ToShortDateString();
+                    File.AppendAllText("../../../Files/OutputLiterature.txt", outputLiterature);
+
+                    allLiteratures[dataLiterature.SelectedCells[0].RowIndex].COUNT--;
+                    allLiteratures[dataLiterature.SelectedCells[0].RowIndex].UpdateLiterature();
+                    readFromFileForData();
+                }
+                else
+                {
+                    MessageBox.Show("Данного экземпляра нет в наличии");
+                }
+            }
+            else {
+                MessageBox.Show("Данного экземпляра нет в наличии");
             }
         }
     }

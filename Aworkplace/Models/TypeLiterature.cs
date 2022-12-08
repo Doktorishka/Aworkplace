@@ -31,7 +31,7 @@
                 string[] line = allReader[0].Split(' ');
                 if (ID == Convert.ToInt32(line[0]))
                 {
-                    allReader[i] = "\n" + ID.ToString() + " " + Author + " " + Title + " " + COUNT.ToString() + " " + DateOutput.ToString() + " " + idType.ToString() + " " + WhoisAutorPrint;
+                    allReader[i] = ID.ToString() + " " + Title + " " + Author + " " + COUNT.ToString() + " " + DateOutput.Value.ToShortDateString() + " " + idType.ToString() + " " + WhoisAutorPrint;
                 }
             }
             File.WriteAllLines("../../../Files/Literature.txt", allReader);

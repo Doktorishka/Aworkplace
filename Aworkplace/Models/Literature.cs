@@ -31,7 +31,7 @@ namespace Aworkplace.Models
         {
             string lastLine = File.ReadLines("../../../Files/Literature.txt").Last();
             string[] ident = lastLine.Split(' ');
-            string literature = "\n" +  (Convert.ToInt32(ident[0]) + 1).ToString() + " " + author + " " + title + " " + numInstance.ToString() + " " + dateOutputLiterature.ToString() + " 0 undefined";
+            string literature = (Convert.ToInt32(ident[0]) + 1).ToString() + " " + author + " " + title + " " + numInstance.ToString() + " " + dateOutputLiterature.ToString() + " 0 undefined\n";
             File.AppendAllText("../../../Files/Literature.txt", literature);
         }
 
@@ -61,7 +61,7 @@ namespace Aworkplace.Models
                 string[] line = allReader[0].Split(' ');
                 if (id == Convert.ToInt32(line[0]))
                 {
-                    allReader[i] = "\n" +  id.ToString() + " " + author + " " + title + " " + numInstance.ToString() + " " + dateOutputLiterature.ToString() + " 0 undefined";;
+                    allReader[i] = id.ToString() + " " + author + " " + title + " " + numInstance.ToString() + " " + dateOutputLiterature.ToString() + " 0 undefined";
                 }
             }
             File.WriteAllLines("../../../Files/Literature.txt", allReader);

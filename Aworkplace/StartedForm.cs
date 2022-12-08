@@ -1,8 +1,4 @@
-using Aworkplace.Models;
 using Aworkplace.Views;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Windows.Forms.VisualStyles;
 
 namespace Aworkplace
 {
@@ -12,7 +8,7 @@ namespace Aworkplace
         {
             InitializeComponent();
         }
-        private async void registerReaderFromButton_Click(object sender, EventArgs e)
+        private void registerReaderFromButton_Click(object sender, EventArgs e)
         {
             registerReader rr = new registerReader();
             
@@ -45,6 +41,19 @@ namespace Aworkplace
         {
             outputLiteratureForReader outputLiteratureForReader = new outputLiteratureForReader();
             outputLiteratureForReader.Show();
+        }
+
+        private void acceptBookFormButton_Click(object sender, EventArgs e)
+        {
+            inputLiteratureFromReader ilr = new inputLiteratureFromReader();
+            ilr.Show();
+        }
+
+        private void listingDebtorFromButton_Click(object sender, EventArgs e)
+        {
+            listDebtorReader ldr = new listDebtorReader();
+
+            ldr.Show();
         }
     }
 }
