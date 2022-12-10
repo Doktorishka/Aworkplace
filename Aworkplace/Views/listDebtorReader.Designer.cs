@@ -56,7 +56,6 @@
             this.acceptBookFormButton.TabIndex = 1;
             this.acceptBookFormButton.Text = "Принять книгу";
             this.acceptBookFormButton.UseVisualStyleBackColor = true;
-            this.acceptBookFormButton.Click += new System.EventHandler(this.acceptBookFormButton_Click);
             // 
             // listDebtorReader
             // 

@@ -14,6 +14,8 @@ namespace Aworkplace.Views
 {
     public partial class registerLiterature : Form
     {
+        Functions f = new Functions();
+
         public registerLiterature()
         {
             InitializeComponent();
@@ -26,37 +28,9 @@ namespace Aworkplace.Views
 
         }
 
-        private bool isValidation()
-        {
-            bool rule = true;
-            if (nameLiterature.Text == null || nameLiterature.Text == String.Empty || nameLiterature.Text == "")
-            {
-                errorLabelLastName.Visible = true;
-                rule = false;
-            }
-
-            if (nameAuthor.Text == null || nameAuthor.Text == String.Empty || nameAuthor.Text == "")
-            {
-                errorLabelFirstName.Visible = true;
-                rule = false;
-            }
-            if (countLinerature.Value == -1 || countLinerature.Value == null)
-            {
-                errorLabelCount.Visible = true;
-                rule = false;
-            }
-            if (datePublish.Text == null || datePublish.Text == String.Empty || datePublish.Text == "")
-            {
-                errorLabelDateBirth.Visible = true;
-                rule = false;
-            }
-
-            return rule;
-        }
-
         private void registrationButton_Click(object sender, EventArgs e)
         {
-            if (isValidation()){
+            if (f.isValidation(countLinerature.Value, nameLiterature.Text, nameAuthor.Text, datePublish.Text)){
                 errorLabelLastName.Visible = false;
                 errorLabelFirstName.Visible = false;
                 errorLabelDateBirth.Visible = false;

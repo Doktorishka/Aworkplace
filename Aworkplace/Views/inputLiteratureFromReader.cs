@@ -1,13 +1,5 @@
 ﻿using Aworkplace.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Aworkplace.Views
 {
@@ -150,28 +142,10 @@ namespace Aworkplace.Views
                 }
                 allInputLiterature = allInputLiterature.Where(x => x != findstring).ToArray();
                 File.WriteAllLines("../../../Files/OutputLiterature.txt", allInputLiterature);
-
                 allLiteratures[(int)dataOutputLiterature.Rows[dataOutputLiterature.SelectedCells[0].RowIndex].Cells[0].Value - 1].COUNT++;
                 allLiteratures[(int)dataOutputLiterature.Rows[dataOutputLiterature.SelectedCells[0].RowIndex].Cells[0].Value - 1].UpdateLiterature();
-
-
                 MessageBox.Show("Книга успешно принята!");
                 readFromFileForData();
-                //dataOutputLiterature.CellClick += dataReader_CellClick(object sender, DataGridViewCellEventArgs e);
-
-                // По образу и подобию DeleteLiterature() из базового класса Literature
-                //string findstring = "";
-                //string[] allLiterature = File.ReadAllLines("../../../Files/Literature.txt");
-                //foreach (string readerString in allLiterature)
-                //{
-                //    string[] line = readerString.Split(' ');
-                //    if (id == Convert.ToInt32(line[0]))
-                //    {
-                //        findstring = readerString;
-                //    }
-                //}
-                //allLiterature = allLiterature.Where(x => x != findstring).ToArray();
-                //File.WriteAllLines("../../../Files/Literature.txt", allLiterature);
             }
         }
     }

@@ -57,6 +57,9 @@ namespace Aworkplace.Views
                 allLiteratures.Add(tl);
             }
 
+
+
+
             dataLiterature.RowCount = allLiteratures.Count;
 
             for (int i = 0; i < dataLiterature.RowCount; i++)

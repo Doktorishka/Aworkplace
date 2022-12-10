@@ -4,6 +4,8 @@ namespace Aworkplace.Views
 {
     public partial class registerReader : Form
     {
+        Functions f = new Functions();
+
         public registerReader()
         {
             InitializeComponent();
@@ -15,29 +17,9 @@ namespace Aworkplace.Views
             }
         }
 
-        private bool isValidation()
-        {
-            bool rule = true;
-            if (lastNameReader.Text == null || lastNameReader.Text == String.Empty || lastNameReader.Text == ""){
-                errorLabelLastName.Visible = true;
-                rule = false;
-              }
-
-            if (firstNameReader.Text == null || firstNameReader.Text == String.Empty || firstNameReader.Text == "") {
-                errorLabelFirstName.Visible = true;
-                rule = false;
-            }
-            if (dateBirthReader.Text == null || dateBirthReader.Text == String.Empty || dateBirthReader.Text == "") {
-                errorLabelDateBirth.Visible = true;
-                rule = false;
-            }
-                
-            return rule;
-        }
-
         private void registrationButton_Click(object sender, EventArgs e)
         {
-            if (isValidation())
+            if (f.isValidation(lastNameReader.Text, firstNameReader.Text, dateBirthReader.Text))
             {
                 errorLabelLastName.Visible = false;
                 errorLabelFirstName.Visible = false;

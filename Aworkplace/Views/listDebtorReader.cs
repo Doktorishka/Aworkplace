@@ -1,13 +1,5 @@
 ﻿using Aworkplace.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Aworkplace.Views
 {
@@ -18,11 +10,7 @@ namespace Aworkplace.Views
         List<string> incorrectOutput = new List<string>();
 
         Dictionary<int, int?> idCard = new Dictionary<int, int?>();
-        Dictionary<int, int?> idLiterature = new Dictionary<int, int?>();
-
-        
-
-
+        Dictionary<int, int?> idLiterature = new Dictionary<int, int?>(); 
         Dictionary<Int32, String> typeLiterature = new Dictionary<Int32, String>();
 
         public listDebtorReader()
@@ -118,12 +106,34 @@ namespace Aworkplace.Views
                 dataDebtor.Rows[dataDebtor.RowCount - 1].Cells[2].Value = line[2];
             }
         }
-
         private void acceptBookFormButton_Click(object sender, EventArgs e)
         {
             if (dataDebtor.SelectedCells[0].RowIndex != -1)
             {
+                string findstring = "";
+                string[] allInputLiterature = File.ReadAllLines("../../../Files/OutputLiterature.txt");
 
+
+                int? idCardINT = idCard.FirstOrDefault(x => x.Key == dataDebtor.SelectedCells[0].RowIndex).Value;
+                int idLiteratureValue = (int)idLiterature.FirstOrDefault(x => x.Key == dataDebtor.SelectedCells[0].RowIndex).Value;
+
+                foreach (var all in allInputLiterature) {
+                    string[] line = all.Split(' ');
+                    if (Convert.ToInt32(line[0]) == idLiteratureValue && Convert.ToInt32(line[1]) == idCardINT) {
+                        findstring = all;
+                    }
+                }
+                allInputLiterature = allInputLiterature.Where(x => x != findstring).ToArray();
+                File.WriteAllLines("../../../Files/OutputLiterature.txt", allInputLiterature);
+
+                foreach (var find in allLiteratures) {
+                    if (find.ID == idLiteratureValue) {
+                        find.COUNT++;
+                        find.UpdateLiterature();
+                    } 
+                }
+                MessageBox.Show("Книга успешно принята!");
+                readFromFileForData();
             }
             else {
                 MessageBox.Show("Выделите хотя бы одну строку!!!");
