@@ -45,7 +45,6 @@ namespace Aworkplace.Models
                 string[] objectType = t.Split(" ");
                 type.Add(Convert.ToInt32(objectType[0]), objectType[1]);
             }
-
             return type;
         }
 
