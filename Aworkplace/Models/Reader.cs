@@ -1,9 +1,4 @@
 ﻿using Aworkplace.Models.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Aworkplace.Models
 {
@@ -16,6 +11,7 @@ namespace Aworkplace.Models
         private string? patronomyc { get; set; }
         private DateTime? dateBirth { get; set; }
 
+        public static string pathFile = "../../../Files/Readers.txt";
         public int? ID { get => id; set => id = value; }
         public int? IDReaderCard { get => idReaderCard; set => idReaderCard = value; }
         public string? FirstName { get => firstName; set =>firstName = value; }

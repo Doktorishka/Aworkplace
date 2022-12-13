@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Aworkplace.Models
+﻿namespace Aworkplace.Models
 {
     public class TypeReader : Reader
     {
@@ -12,6 +6,7 @@ namespace Aworkplace.Models
         private string nameType { get; set; }
         private string typeObject { get; set; }
 
+        public static string pathFile = "../../../Files/TypeReader.txt";
         public int Identificator { get => identificatorType; set =>  identificatorType = value; }
         public string NameType { get => nameType; set => nameType = value; }
         public string TypeObject { get => typeObject; set => typeObject = value; }
@@ -31,14 +26,14 @@ namespace Aworkplace.Models
 
         public override void AddReader()
         {
-            string lastLine = File.ReadLines("../../../Files/Readers.txt").Last();
+            string lastLine = File.ReadLines(Reader.pathFile).Last();
             string[] ident = lastLine.Split(' ');
             string reader = "\n" + ID.ToString() + " " + IDReaderCard.ToString() + " " + LastName + " " + FirstName + " " + Patronomyc + " " + DateBirth.Value.ToShortDateString() + " " + identificatorType.ToString() + " " + typeObject;
-            File.AppendAllText("../../../Files/Readers.txt", reader);
+            File.AppendAllText(Reader.pathFile, reader);
         }
         public override void UpdateReader()
         {
-            string[] allReader = File.ReadAllLines("../../../Files/Readers.txt");
+            string[] allReader = File.ReadAllLines(Reader.pathFile);
 
             for (int i = 0; i < allReader.Length; i++)
             {
@@ -48,7 +43,7 @@ namespace Aworkplace.Models
                     allReader[i] = "\n" + ID.ToString() + " " + IDReaderCard.ToString() + " " + LastName + " " + FirstName + " " + Patronomyc + " " + DateBirth.Value.ToShortDateString() + " "+identificatorType.ToString() + " " + typeObject;
                 }
             }
-            File.WriteAllLines("../../../Files/Readers.txt", allReader);
+            File.WriteAllLines(Reader.pathFile, allReader);
         }
     }
 }

@@ -1,13 +1,88 @@
 ﻿using Aworkplace.Models.Interfaces;
+using System.Data;
 using System.Reflection;
+using System.Reflection.PortableExecutable;
 
 namespace Aworkplace.Models
 {
     public class Functions : IFunctions
     {
+        public List<TypeLiterature> getLiteratures()
+        {
+            List<TypeLiterature> list = new List<TypeLiterature>();
+            Dictionary<int, string> typeLiterature = getType(TypeReader.pathFile);
+
+
+            string[] allLiterature = File.ReadAllLines(Literature.pathFile);
+            foreach (string literString in allLiterature)
+            {
+                string[] line = literString.Split(' ');
+
+                TypeLiterature tl = new TypeLiterature
+                {
+                    ID = int.Parse(line[0]),
+                    Title = line[1],
+                    Author = line[2],
+                    COUNT = Convert.ToInt32(line[3]),
+                    DateOutput = Convert.ToDateTime(line[4]),
+                    IdType = Convert.ToInt32(line[5]),
+                    NameType = typeLiterature.FirstOrDefault(x => x.Key == Convert.ToInt32(line[5])).Value,
+                    WhoisAutorPrint = line[6]
+                };
+
+                list.Add(tl);
+            }
+
+            return list;
+        }
+
+        public Dictionary<int, string> getType(string path)
+        {
+            Dictionary<int, string> type = new Dictionary<int, string>();
+            string[] allType = File.ReadAllLines(path);
+            foreach (string t in allType)
+            {
+                string[] objectType = t.Split(" ");
+                type.Add(Convert.ToInt32(objectType[0]), objectType[1]);
+            }
+
+            return type;
+        }
+
+        public List<TypeReader> getReaders()
+        {
+            List<TypeReader> list = new List<TypeReader>();
+
+            Dictionary<int, string> typeReader = getType(TypeReader.pathFile);
+
+            string[] allReaders = File.ReadAllLines(Reader.pathFile);
+
+            foreach (string readerString in allReaders)
+            {
+                string[] line = readerString.Split(' ');
+
+                TypeReader tr = new TypeReader()
+                {
+                    ID = Convert.ToInt32(line[0]),
+                    IDReaderCard = Convert.ToInt32(line[1]),
+                    LastName = line[2],
+                    FirstName = line[3],
+                    Patronomyc = line[4],
+                    DateBirth = Convert.ToDateTime(line[5]),
+                    Identificator = Convert.ToInt32(line[6]),
+                    TypeObject = line[7],
+                    NameType = typeReader.FirstOrDefault(x => x.Key == Convert.ToInt32(line[6])).Value
+                };
+
+                list.Add(tr);
+            }
+
+            return list;
+        }
+
         public Task<object> GetTaskFromEvent(object o, string evt)
         {
-            if (o == null || evt == null) throw new ArgumentNullException("Аргумент имеет значения null");
+            if (o == null || evt == null) throw new ArgumentNullException("Нулевой аргумент");
 
             EventInfo einfo = o.GetType().GetEvent(evt);
             if (einfo == null)
@@ -35,6 +110,8 @@ namespace Aworkplace.Models
             return tcs.Task;
         }
 
+        #region Валидация
+
         public bool isValidation(params string[] strings)
         {
             bool rule = true;
@@ -58,8 +135,9 @@ namespace Aworkplace.Models
             return rule;
         }
 
+        #endregion
 
-        public void readFromFileForData(in string path, ref DataGridView data, ref List<TypeReader> reader, ref Dictionary<int, string> typeReader)
+        public void readFromFileForData(ref DataGridView data, ref List<TypeReader> reader, ref Dictionary<int, string> typeReader)
         {
             data.Rows.Clear();
             data.Columns.Clear();
@@ -73,25 +151,7 @@ namespace Aworkplace.Models
             data.Columns[4].HeaderText = "Тип читателя";
             data.Columns[5].HeaderText = "Место";
 
-            string[] allReaders = File.ReadAllLines(path);
-
-            foreach (string readerString in allReaders) {
-                string[] line = readerString.Split(' ');
-
-                        TypeReader tr = new TypeReader();
-
-                        tr.ID = Convert.ToInt32(line[0]);
-                        tr.IDReaderCard = Convert.ToInt32(line[1]);
-                        tr.LastName = line[2];
-                        tr.FirstName = line[3];
-                        tr.Patronomyc = line[4];
-                        tr.DateBirth = Convert.ToDateTime(line[5]);
-                        tr.Identificator = Convert.ToInt32(line[6]);
-                        tr.TypeObject = line[7];
-                        tr.NameType = typeReader.FirstOrDefault(x => x.Key == Convert.ToInt32(line[6])).Value;
-
-                        reader.Add(tr);
-            }
+            reader = getReaders();
 
             data.RowCount = reader.Count;
 
@@ -107,16 +167,138 @@ namespace Aworkplace.Models
 
         }
 
-        public void readFromFileForData(out DataGridView data, out TypeLiterature literature, out Dictionary<int, string> typeLiterature)
+        public void readFromFileForData(ref DataGridView data, ref List<TypeLiterature> literature, ref Dictionary<int, string> typeLiterature)
         {
-            throw new NotImplementedException();
+            data.Rows.Clear();
+            literature.Clear();
+            typeLiterature.Clear();
+
+            data.ColumnCount = 6;
+            data.Columns[0].HeaderText = "Наименование экземпляра";
+            data.Columns[1].HeaderText = "Наименование автора";
+            data.Columns[2].HeaderText = "Количество экземпляров";
+            data.Columns[3].HeaderText = "Дата публикации";
+            data.Columns[4].HeaderText = "Тип литературы";
+            data.Columns[5].HeaderText = "Издательство";
+
+            typeLiterature = getType(TypeLiterature.pathFile);
+
+            literature = getLiteratures();
+
+            data.RowCount = literature.Count;
+
+            for (int i = 0; i < data.RowCount; i++)
+            {
+                data.Rows[i].Cells[0].Value = literature[i].Title;
+                data.Rows[i].Cells[1].Value = literature[i].Author;
+                data.Rows[i].Cells[2].Value = literature[i].COUNT;
+                data.Rows[i].Cells[3].Value = literature[i].DateOutput.Value.ToShortDateString();
+                data.Rows[i].Cells[4].Value = literature[i].NameType;
+                data.Rows[i].Cells[5].Value = literature[i].WhoisAutorPrint;
+                data.Rows[i].HeaderCell.Value = literature[i].ID.ToString();
+            }
+
         }
 
-        public void readFromFileForData(out DataGridView dataLiterature, out DataGridView dataReader, out TypeLiterature literature, out Dictionary<int, string> typeLiterature)
+        public void readFromFileForData(ref DataGridView dataLiterature, ref DataGridView dataReader, ref List<TypeLiterature> literatures, ref List<TypeReader> readers, ref Dictionary<int, string> typeLiterature)
         {
-            throw new NotImplementedException();
+            literatures.Clear();
+            readers.Clear();
+            dataReader.Rows.Clear();
+            dataLiterature.Rows.Clear();
+            typeLiterature.Clear();
+
+            typeLiterature = getType(TypeLiterature.pathFile);
+
+            dataLiterature.ColumnCount = 4;
+            dataLiterature.Columns[0].HeaderText = "Наименование экземпляра";
+            dataLiterature.Columns[1].HeaderText = "Автор";
+            dataLiterature.Columns[2].HeaderText = "В наличии";
+            dataLiterature.Columns[3].HeaderText = "Тип экземпляра";
+
+            dataReader.ColumnCount = 1;
+            dataReader.Columns[0].HeaderText = "ФИО";
+
+            literatures = getLiteratures();
+
+            dataLiterature.RowCount = literatures.Count;
+
+            for (int i = 0; i < dataLiterature.RowCount; i++)
+            {
+                dataLiterature.Rows[i].Cells[0].Value = literatures[i].Title;
+                dataLiterature.Rows[i].Cells[1].Value = literatures[i].Author;
+                dataLiterature.Rows[i].Cells[2].Value = literatures[i].COUNT;
+                dataLiterature.Rows[i].Cells[3].Value = literatures[i].NameType;
+                dataLiterature.Rows[i].HeaderCell.Value = literatures[i].ID.ToString();
+            }
+
+            readers = getReaders();
+
+            dataReader.RowCount = readers.Count;
+
+            for (int i = 0; i < dataReader.RowCount; i++)
+            {
+                string fio = readers[i].LastName + " " + readers[i].FirstName + " " + readers[i].Patronomyc;
+                dataReader.Rows[i].Cells[0].Value = fio;
+                dataReader.Rows[i].HeaderCell.Value = readers[i].IDReaderCard.ToString();
+            }
         }
 
-        
+        public void readFromFileForData(ref DataGridView data, ref List<TypeReader> reader, ref List<TypeLiterature> literature, ref Dictionary<int, string> typeLiterature, ref List<string> Output, out Dictionary<int, int?> idCard, out Dictionary<int, int?> idLiterature)
+        {
+            literature.Clear();
+            reader.Clear();
+            Output.Clear();
+            data.Rows.Clear();
+            idLiterature = new Dictionary<int, int?>();
+            idCard = new Dictionary<int, int?>();
+
+
+            data.ColumnCount = 3;
+
+            data.Columns[0].HeaderText = "ФИО";
+            data.Columns[1].HeaderText = "Наименование экземпляра";
+            data.Columns[2].HeaderText = "Дата возврата";
+
+            typeLiterature = getType(TypeLiterature.pathFile);
+            reader = getReaders();
+            literature = getLiteratures();
+
+            string[] allOutputLiterature = File.ReadAllLines(LiteratureFromReader.pathFile);
+
+            foreach (var all in allOutputLiterature)
+            {
+                string[] line = all.Split(' ');
+                if (Convert.ToDateTime(line[2]) < DateTime.Now)
+                {
+                    Output.Add(all);
+                }
+            }
+
+            foreach (var incorrect in Output)
+            {
+                data.RowCount++;
+                string[] line = incorrect.Split(" ");
+                foreach (var l in literature)
+                {
+                    if (Convert.ToInt32(line[0]) == l.ID)
+                    {
+                        data.Rows[data.RowCount - 1].Cells[1].Value = l.Title;
+                        idLiterature.Add(data.RowCount - 1, l.ID);
+                    }
+                }
+                foreach (var r in reader)
+                {
+                    if (Convert.ToInt32(line[1]) == r.IDReaderCard)
+                    {
+                        string fio = r.LastName + " " + r.FirstName + " " + r.Patronomyc;
+                        data.Rows[data.RowCount - 1].Cells[0].Value = fio;
+                        idCard.Add(data.RowCount - 1, r.IDReaderCard);
+                    }
+                }
+                data.Rows[data.RowCount - 1].Cells[2].Value = line[2];
+            }
+
+        }
     }
 }
