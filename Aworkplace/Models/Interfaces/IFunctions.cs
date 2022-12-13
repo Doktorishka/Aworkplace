@@ -11,12 +11,14 @@ namespace Aworkplace.Models.Interfaces
         /// <summary> 
         /// Чтение читателя из файла и запись данных в DataGridView формы пользователя
         /// </summary>
-        /// <param name="path">Путь к текстовому файлу</param>
         /// <param name="data">DataGridView формы пользователя</param>
         /// <param name="reader"> Список читателей</param>
         /// <param name="typeReader">Словарь типов читателей</param>
 
-        void readFromFileForData(in string path, ref DataGridView data, ref List<TypeReader> reader, ref Dictionary<Int32, String> typeReader);
+        void readFromFileForData(ref DataGridView data, ref List<TypeReader> reader, ref Dictionary<Int32, String> typeReader);
+
+
+        void readFromFileForData(ref DataGridView data, ref List<TypeReader> reader, ref List<TypeLiterature> literature, ref Dictionary<int, string> typeLiterature, ref List<string> Output, out Dictionary<int, int?> idCard, out Dictionary<int, int?> idLiterature);
 
 
         /// <summary>
@@ -25,16 +27,18 @@ namespace Aworkplace.Models.Interfaces
         /// <param name="data"></param>
         /// <param name="literature"></param>
         /// <param name="typeLiterature"></param>
-        void readFromFileForData(out DataGridView data, out TypeLiterature literature, out Dictionary<Int32, String> typeLiterature);
+        void readFromFileForData(ref DataGridView data, ref List<TypeLiterature> literature, ref Dictionary<Int32, String> typeLiterature);
+
 
         /// <summary>
-        /// Чтение литературы и читателей и запись данных в DataGridViews формы пользователя
+        /// Чтение литературы и читателей и запись данных в DataGridViews формы пользователя, используется для формы Список должников
         /// </summary>
         /// <param name="dataLiterature">DataGridView Литературы</param>
         /// <param name="dataReader">DataGridView Читателей</param>
-        /// <param name="literature">Список литературы</param>
+        /// <param name="literatures">Список литературы</param>
+        /// <param name="readers">Список читателей в должниках</param>
         /// <param name="typeLiterature">Словарь типов литературы</param>
-        void readFromFileForData(out DataGridView dataLiterature,out DataGridView dataReader, out TypeLiterature literature, out Dictionary<Int32, String> typeLiterature);
+        void readFromFileForData(ref DataGridView dataLiterature,ref DataGridView dataReader, ref List<TypeLiterature> literatures,ref List<TypeReader> readers, ref Dictionary<Int32, String> typeLiterature);
 
         /// <summary>
         /// Проверка введенных полей пользователем
@@ -58,5 +62,12 @@ namespace Aworkplace.Models.Interfaces
         /// <param name="evt">Событие у объекта которое должно произойти</param>
         /// <returns></returns>
         Task<object> GetTaskFromEvent(object o, string evt);
+
+        List<TypeLiterature> getLiteratures();
+
+        List<TypeReader> getReaders();
+
+        Dictionary<Int32, String> getType(string path);
+
     }
 }

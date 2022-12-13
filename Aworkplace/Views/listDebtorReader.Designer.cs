@@ -35,9 +35,12 @@
             // 
             // dataDebtor
             // 
+            this.dataDebtor.AllowUserToAddRows = false;
+            this.dataDebtor.AllowUserToDeleteRows = false;
             this.dataDebtor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataDebtor.Location = new System.Drawing.Point(12, 12);
             this.dataDebtor.Name = "dataDebtor";
+            this.dataDebtor.ReadOnly = true;
             this.dataDebtor.RowHeadersWidth = 51;
             this.dataDebtor.RowTemplate.Height = 29;
             this.dataDebtor.Size = new System.Drawing.Size(776, 233);

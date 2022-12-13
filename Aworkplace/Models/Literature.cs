@@ -16,7 +16,7 @@ namespace Aworkplace.Models
         private DateTime? dateOutputLiterature { get; set; }
 
 
-
+        public static string pathFile = "../../../Files/Literature.txt";
         public int? ID { get => id; set => id = value; }
         public string? Author { get => author; set => author = value; }
         public string? Title { get => title; set => title = value; }
@@ -29,17 +29,17 @@ namespace Aworkplace.Models
 
         public virtual void AddLiterature()
         {
-            string lastLine = File.ReadLines("../../../Files/Literature.txt").Last();
+            string lastLine = File.ReadLines(pathFile).Last();
             string[] ident = lastLine.Split(' ');
             string literature = (Convert.ToInt32(ident[0]) + 1).ToString() + " " + author + " " + title + " " + numInstance.ToString() + " " + dateOutputLiterature.ToString() + " 0 undefined\n";
-            File.AppendAllText("../../../Files/Literature.txt", literature);
+            File.AppendAllText(pathFile, literature);
         }
 
         public virtual void DeleteLiterature()
         {
 
             string findstring = "";
-            string[] allLiterature = File.ReadAllLines("../../../Files/Literature.txt");
+            string[] allLiterature = File.ReadAllLines(pathFile);
             foreach (string readerString in allLiterature)
             {
                 string[] line = readerString.Split(' ');
@@ -49,12 +49,12 @@ namespace Aworkplace.Models
                 }
             }
             allLiterature = allLiterature.Where(x => x != findstring).ToArray();
-            File.WriteAllLines("../../../Files/Literature.txt", allLiterature);
+            File.WriteAllLines(pathFile, allLiterature);
         }
 
         public virtual void UpdateLiterature()
         {
-            string[] allReader = File.ReadAllLines("../../../Files/Literature.txt");
+            string[] allReader = File.ReadAllLines(pathFile);
 
             for (int i = 0; i < allReader.Length; i++)
             {
@@ -64,12 +64,12 @@ namespace Aworkplace.Models
                     allReader[i] = id.ToString() + " " + author + " " + title + " " + numInstance.ToString() + " " + dateOutputLiterature.ToString() + " 0 undefined";
                 }
             }
-            File.WriteAllLines("../../../Files/Literature.txt", allReader);
+            File.WriteAllLines(pathFile, allReader);
         }
 
         public int getLastId()
         {
-            string lastLine = File.ReadLines("../../../Files/Literature.txt").Last();
+            string lastLine = File.ReadLines(pathFile).Last();
             string[] ident = lastLine.Split(' ');
             return Convert.ToInt32(ident[0]);
         }
