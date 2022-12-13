@@ -1,33 +1,27 @@
 ﻿using Aworkplace.Models;
-using Aworkplace.Models.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Collections.ObjectModel;
 
 namespace Aworkplace.Views
 {
     public partial class listInputLiterature : Form
     {
-        List<TypeLiterature> allLiteratures = new List<TypeLiterature>();
-        Dictionary<Int32, String> typeLiterature = new Dictionary<Int32, String>();
-        List<TypeReader> allReaders = new List<TypeReader>();
+        readonly Functions f = new Functions();
+        readonly List<TypeLiterature> allLiteratures = new List<TypeLiterature>();
+        readonly Dictionary<Int32, String> typeLiterature = new Dictionary<Int32, String>();
+        readonly List<TypeReader> allReaders = new List<TypeReader>();
+        readonly List<string> incorrectOutput = new List<string>();
 
         public listInputLiterature()
         {
             InitializeComponent();
 
-            dataLiterature.ColumnCount = 4;
-            dataLiterature.Columns[0].HeaderText = "Наименование экземпляра";
-            dataLiterature.Columns[1].HeaderText = "Автор";
-            dataLiterature.Columns[2].HeaderText = "В наличии";
-            dataLiterature.Columns[3].HeaderText = "Тип экземпляра";
+            dataLiterature.ColumnCount = 5;
+            dataLiterature.Columns[0].HeaderText = "ИД";
+            dataLiterature.Columns[1].HeaderText = "Наименование экземпляра";
+            dataLiterature.Columns[2].HeaderText = "Автор";
+            dataLiterature.Columns[3].HeaderText = "Кол-во в пользовании";
+            dataLiterature.Columns[4].HeaderText = "У кого";
 
             string[] allType = File.ReadAllLines("../../../Files/TypeLiterature.txt");
             foreach (string type in allType)
@@ -49,84 +43,67 @@ namespace Aworkplace.Views
             {
                 string[] line = literString.Split(' ');
 
-                TypeLiterature tl = new TypeLiterature();
-
-                tl.ID = int.Parse(line[0]);
-                tl.Title = line[1];
-                tl.Author = line[2];
-                tl.COUNT = Convert.ToInt32(line[3]);
-                tl.DateOutput = Convert.ToDateTime(line[4]);
-                tl.ID = Convert.ToInt32(line[5]);
-                tl.NameType = typeLiterature.FirstOrDefault(x => x.Key == Convert.ToInt32(line[5])).Value;
-                tl.WhoisAutorPrint = line[6];
-
+                TypeLiterature tl = new TypeLiterature
+                {
+                    ID = Convert.ToInt32(line[0]),
+                    Title = line[1],
+                    Author = line[2],
+                    COUNT = Convert.ToInt32(line[3]),
+                    DateOutput = Convert.ToDateTime(line[4]),
+                    IdType = Convert.ToInt32(line[5]),
+                    NameType = typeLiterature.FirstOrDefault(x => x.Key == Convert.ToInt32(line[5])).Value,
+                    WhoisAutorPrint = line[6]
+                };
                 allLiteratures.Add(tl);
             }
 
-            dataLiterature.RowCount = allLiteratures.Count;
-
-            for (int i = 0; i < dataLiterature.RowCount; i++)
+            string[] allReader = File.ReadAllLines("../../../Files/Readers.txt");
+            foreach (string readerString in allReader)
             {
-                dataLiterature.Rows[i].Cells[0].Value = allLiteratures[i].Title;
-                dataLiterature.Rows[i].Cells[1].Value = allLiteratures[i].Author;
-                dataLiterature.Rows[i].Cells[2].Value = allLiteratures[i].COUNT;
-                dataLiterature.Rows[i].Cells[3].Value = allLiteratures[i].NameType;
-                dataLiterature.Rows[i].HeaderCell.Value = allLiteratures[i].ID.ToString();
+                string[] line = readerString.Split(' ');
+
+                TypeReader tr = new TypeReader
+                {
+                    ID = Convert.ToInt32(line[0]),
+                    IDReaderCard = Convert.ToInt32(line[1]),
+                    LastName = line[2],
+                    FirstName = line[3],
+                    Patronomyc = line[4],
+                    TypeObject = line[7]
+                };
+
+                allReaders.Add(tr);
             }
 
-            //foreach (var incorrect in incorrectOutput)
-            //{
-            //    dataDebtor.RowCount++;
-            //    string[] line = incorrect.Split(" ");
-            //    foreach (var l in allLiteratures)
-            //    {
-            //        if (Convert.ToInt32(line[0]) == l.ID)
-            //        {
-            //            dataDebtor.Rows[dataDebtor.RowCount - 1].Cells[1].Value = l.Title;
-            //            idLiterature.Add(dataDebtor.RowCount - 1, l.ID);
-            //        }
-            //    }
-            //    foreach (var r in allReaders)
-            //    {
-            //        if (Convert.ToInt32(line[1]) == r.IDReaderCard)
-            //        {
-            //            string fio = r.LastName + " " + r.FirstName + " " + r.Patronomyc;
-            //            dataDebtor.Rows[dataDebtor.RowCount - 1].Cells[0].Value = fio;
-            //            idCard.Add(dataDebtor.RowCount - 1, r.IDReaderCard);
-            //        }
-            //    }
-            //    dataDebtor.Rows[dataDebtor.RowCount - 1].Cells[2].Value = line[2];
-            //}
-        }
+            string[] allOutputLiterature = File.ReadAllLines("../../../Files/OutputLiterature.txt");
 
-        public static Task<object> GetTaskFromEvent(object o, string evt)
-        {
-            if (o == null || evt == null) throw new ArgumentNullException("Аргумент имеет значения null");
-
-            EventInfo einfo = o.GetType().GetEvent(evt);
-            if (einfo == null)
+            foreach (var all in allOutputLiterature)
             {
-                throw new ArgumentException(String.Format("У объекта *{0}* нет событий *{1}* ", o, evt));
+                string[] line = all.Split(' ');
+                if (Convert.ToDateTime(line[2]) < DateTime.Now)
+                {
+                    incorrectOutput.Add(all);
+                }
             }
 
-            TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
-            MethodInfo mi = null;
-            Delegate deleg = null;
-            EventHandler handler = null;
-
-            //код обработчика события
-            handler = (s, e) =>
-            {
-                mi = handler.Method;
-                deleg = Delegate.CreateDelegate(einfo.EventHandlerType, handler.Target, mi);
-                einfo.RemoveEventHandler(s, deleg); //отцепляем обработчик события
-                tcs.TrySetResult(null); //сигнализируем о наступлении события
-            };
-
-            mi = handler.Method;
-            deleg = Delegate.CreateDelegate(einfo.EventHandlerType, handler.Target, mi); //получаем делегат нужного типа
-            einfo.AddEventHandler(o, deleg); //присоединяем обработчик события
-            return tcs.Task;
+            foreach (var incorrect in incorrectOutput) {
+                
+                string[] line = incorrect.Split(' ');
+                foreach(var l in allLiteratures)
+                {
+                    foreach (var r in allReaders)
+                    if (Convert.ToInt32(line[0]) == l.ID && Convert.ToInt32(line[1]) == r.IDReaderCard) {
+                            dataLiterature.RowCount++;
+                            string fio = r.LastName + " " + r.FirstName + " " + r.Patronomyc;
+                        dataLiterature.Rows[dataLiterature.RowCount - 1].Cells[0].Value = l.ID;
+                        dataLiterature.Rows[dataLiterature.RowCount - 1].Cells[1].Value = l.Title;
+                        dataLiterature.Rows[dataLiterature.RowCount - 1].Cells[2].Value = l.Author;
+                        dataLiterature.Rows[dataLiterature.RowCount - 1].Cells[3].Value = l.COUNT;
+                        dataLiterature.Rows[dataLiterature.RowCount - 1].Cells[4].Value = fio;
+                        
+                        }  
+                }
+            }
         }
 
         private async void issuesBookFormButton_Click(object sender, EventArgs e)
@@ -134,7 +111,7 @@ namespace Aworkplace.Views
             outputLiteratureForReader o = new outputLiteratureForReader();
             o.Show();
 
-            await GetTaskFromEvent(o, "FormClosed");
+            await f.GetTaskFromEvent(o, "FormClosed");
             readFromFileForData();
         }
     }

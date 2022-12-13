@@ -8,14 +8,14 @@ namespace Aworkplace.Models.Interfaces
 {
     public interface IFunctions
     {
-        // out in readonly
-
         /// <summary> 
         /// Чтение читателя из файла и запись данных в DataGridView формы пользователя
         /// </summary>
-        /// <param name="data">DataGridView формы пользователя, используется как выходной параметр</param>
-        /// <param name="reader"> Список читателей, используется как выходной параметр </param>
-        /// <param name="typeReader">Словарь типов читателей, используется как выходной параметр</param>
+        /// <param name="path">Путь к текстовому файлу</param>
+        /// <param name="data">DataGridView формы пользователя</param>
+        /// <param name="reader"> Список читателей</param>
+        /// <param name="typeReader">Словарь типов читателей</param>
+
         void readFromFileForData(in string path, ref DataGridView data, ref List<TypeReader> reader, ref Dictionary<Int32, String> typeReader);
 
 
@@ -51,6 +51,12 @@ namespace Aworkplace.Models.Interfaces
         /// <returns></returns>
         bool isValidation(decimal number, params string[] strings); 
 
-        //static Task<object> GetTaskFromEvent(object o, string evt);
+        /// <summary>
+        /// Метод ожидания выполнения задач объекта в потоке
+        /// </summary>
+        /// <param name="o">Объект который отслеживаем</param>
+        /// <param name="evt">Событие у объекта которое должно произойти</param>
+        /// <returns></returns>
+        Task<object> GetTaskFromEvent(object o, string evt);
     }
 }

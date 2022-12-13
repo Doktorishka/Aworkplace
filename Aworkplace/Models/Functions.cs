@@ -1,9 +1,40 @@
 ﻿using Aworkplace.Models.Interfaces;
+using System.Reflection;
 
 namespace Aworkplace.Models
 {
     public class Functions : IFunctions
     {
+        public Task<object> GetTaskFromEvent(object o, string evt)
+        {
+            if (o == null || evt == null) throw new ArgumentNullException("Аргумент имеет значения null");
+
+            EventInfo einfo = o.GetType().GetEvent(evt);
+            if (einfo == null)
+            {
+                throw new ArgumentException(String.Format("У объекта *{0}* нет событий *{1}* ", o, evt));
+            }
+
+            TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
+            MethodInfo mi = null;
+            Delegate deleg = null;
+            EventHandler handler = null;
+
+            //код обработчика события
+            handler = (s, e) =>
+            {
+                mi = handler.Method;
+                deleg = Delegate.CreateDelegate(einfo.EventHandlerType, handler.Target, mi);
+                einfo.RemoveEventHandler(s, deleg); //отцепляем обработчик события
+                tcs.TrySetResult(null); //сигнализируем о наступлении события
+            };
+
+            mi = handler.Method;
+            deleg = Delegate.CreateDelegate(einfo.EventHandlerType, handler.Target, mi); //получаем делегат нужного типа
+            einfo.AddEventHandler(o, deleg); //присоединяем обработчик события
+            return tcs.Task;
+        }
+
         public bool isValidation(params string[] strings)
         {
             bool rule = true;

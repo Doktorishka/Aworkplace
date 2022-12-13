@@ -55,5 +55,12 @@ namespace Aworkplace
 
             ldr.Show();
         }
+
+        private void usedBookFromButton_Click(object sender, EventArgs e)
+        {
+            listInputLiterature list = new listInputLiterature();
+
+            list.ShowDialog();
+        }
     }
 }

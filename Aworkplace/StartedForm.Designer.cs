@@ -83,6 +83,7 @@
             this.usedBookFromButton.TabIndex = 0;
             this.usedBookFromButton.Text = "Экземпляр в пользовании";
             this.usedBookFromButton.UseVisualStyleBackColor = true;
+            this.usedBookFromButton.Click += new System.EventHandler(this.usedBookFromButton_Click);
             // 
             // registerBookFromButton
             // 

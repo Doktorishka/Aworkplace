@@ -35,9 +35,12 @@
             // 
             // dataLiterature
             // 
+            this.dataLiterature.AllowUserToAddRows = false;
+            this.dataLiterature.AllowUserToDeleteRows = false;
             this.dataLiterature.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataLiterature.Location = new System.Drawing.Point(12, 12);
             this.dataLiterature.Name = "dataLiterature";
+            this.dataLiterature.ReadOnly = true;
             this.dataLiterature.RowHeadersWidth = 51;
             this.dataLiterature.RowTemplate.Height = 29;
             this.dataLiterature.Size = new System.Drawing.Size(776, 289);
