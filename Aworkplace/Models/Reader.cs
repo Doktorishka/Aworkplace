@@ -4,12 +4,12 @@ namespace Aworkplace.Models
 {
     public class Reader : IReader
     {
-        private int? id { get; set; }
-        private int? idReaderCard { get; set; }
-        private string? lastName { get; set; }
-        private string? firstName { get; set; }
-        private string? patronomyc { get; set; }
-        private DateTime? dateBirth { get; set; }
+        internal protected int? id { get; protected set; }
+        internal protected int? idReaderCard { get; protected set; }
+        internal protected string? lastName { get; protected set; }
+        internal protected string? firstName { get; protected set; }
+        internal protected string? patronomyc { get; protected set; }
+        internal protected DateTime? dateBirth { get; protected set; }
 
         public static string pathFile = "../../../Files/Readers.txt";
         public int? ID { get => id; set => id = value; }
@@ -68,7 +68,7 @@ namespace Aworkplace.Models
                 foreach (var line in allReader)
                 {
                     string[] lineSplit = line.Split(' ');
-                    if (Convert.ToInt32(lineSplit[2]) == ID)
+                    if (Convert.ToInt32(lineSplit[0]) == ID)
                     {
                         allReader = allReader.Where(x => x != line).ToArray();
                     }

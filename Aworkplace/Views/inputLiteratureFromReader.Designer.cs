@@ -81,11 +81,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(762, 283);
             this.Controls.Add(this.registerInputButton);
             this.Controls.Add(this.dataOutputLiterature);
             this.Controls.Add(this.dataReader);
             this.Name = "inputLiteratureFromReader";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "inputLiteratureFromReader";
             ((System.ComponentModel.ISupportInitialize)(this.dataReader)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataOutputLiterature)).EndInit();

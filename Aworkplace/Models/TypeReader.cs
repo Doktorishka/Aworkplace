@@ -14,7 +14,7 @@
         public TypeReader() : base() { }
 
         public TypeReader(int id, int idCard, string lastName, string firstName, DateTime dateBirth, int ident, string nameType, string typeObject) : base() {
-            this.ID = id;
+            this.id = id;
             this.IDReaderCard = idCard;
             this.LastName = lastName;
             this.FirstName = firstName;

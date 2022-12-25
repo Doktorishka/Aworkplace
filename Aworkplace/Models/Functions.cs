@@ -1,7 +1,7 @@
 ﻿using Aworkplace.Models.Interfaces;
-using System.Data;
 using System.Reflection;
-using System.Reflection.PortableExecutable;
+using System.Security.AccessControl;
+
 
 namespace Aworkplace.Models
 {
@@ -10,7 +10,7 @@ namespace Aworkplace.Models
         public List<TypeLiterature> getLiteratures()
         {
             List<TypeLiterature> list = new List<TypeLiterature>();
-            Dictionary<int, string> typeLiterature = getType(TypeReader.pathFile);
+            Dictionary<int, string> typeLiterature = getType(TypeLiterature.pathFile);
 
 
             string[] allLiterature = File.ReadAllLines(Literature.pathFile);
@@ -26,10 +26,15 @@ namespace Aworkplace.Models
                     COUNT = Convert.ToInt32(line[3]),
                     DateOutput = Convert.ToDateTime(line[4]),
                     IdType = Convert.ToInt32(line[5]),
+                    //Следующая строка - 
+                    /*
+                     * FirstOrDefault - метод выполняющий поиск по заданому условию, возвращающий пару ключ-значение при true
+                     * Лямбда-выражение x => x.Key == Convert.ToInt32(line[5]) - условие поиска возращающий пару к-з и условие при котором должен эту пару вернуть
+                     * FirstOrDefault(Лямбда-выражение).Value - из пары к-з вытаскиваем знчение
+                     */
                     NameType = typeLiterature.FirstOrDefault(x => x.Key == Convert.ToInt32(line[5])).Value,
                     WhoisAutorPrint = line[6]
                 };
-
                 list.Add(tl);
             }
 
@@ -38,7 +43,12 @@ namespace Aworkplace.Models
 
         public Dictionary<int, string> getType(string path)
         {
-            Dictionary<int, string> type = new Dictionary<int, string>();
+            // int == Int32 != Int16 != Int64
+            // int: хранит целое число от -2 147 483 648 до 2 147 483 647 - 4 byte
+            // uint: хранит целое число от 0 до 4 294 967 295 - 4 byte
+            // short: хранит целое число от -32768 до 32767
+            // ushort: хранит целое число от 0 до 65535 
+            Dictionary<int, String> type = new Dictionary<int, string>();
             string[] allType = File.ReadAllLines(path);
             foreach (string t in allType)
             {
@@ -151,7 +161,7 @@ namespace Aworkplace.Models
             data.Columns[5].HeaderText = "Место";
 
             reader = getReaders();
-
+               
             data.RowCount = reader.Count;
 
             for (int i = 0; i < data.RowCount; i++) {
