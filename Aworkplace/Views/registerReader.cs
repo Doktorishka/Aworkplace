@@ -107,6 +107,9 @@ namespace Aworkplace.Views
                 }
             }
             else {
+                errorLabelLastName.Visible = true;
+                errorLabelFirstName.Visible = true;
+                errorLabelDateBirth.Visible = true;
                 MessageBox.Show("Заполните обязательные поля!");
             }
         }
