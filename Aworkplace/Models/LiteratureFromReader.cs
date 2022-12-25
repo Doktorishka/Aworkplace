@@ -28,7 +28,7 @@ namespace Aworkplace.Models
                 string[] line = allReader[0].Split(' ');
                 if (this.ID == Convert.ToInt32(line[0]))
                 {
-                    allReader[i] = ID.ToString() + " " + literature.ID + " " + reader.ID + " " + DateTime.Now.ToShortDateString() + " " + dateOutput + " " + idInput.ToString();
+                    allReader[i] = ID.ToString() + " " + literature.ID + " " + reader.ID + " " + DateInput + " " + dateOutput + " " + idInput.ToString();
                 }
             }
             File.WriteAllLines(Reader.pathFile, allReader);
