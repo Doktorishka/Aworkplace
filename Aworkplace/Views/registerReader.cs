@@ -116,5 +116,10 @@ namespace Aworkplace.Views
             if (!Char.IsDigit(e.KeyChar)) return;
             else e.Handled = true;
         }
+
+        private void registerReader_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

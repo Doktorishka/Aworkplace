@@ -223,6 +223,7 @@
             this.MaximizeBox = false;
             this.Name = "registerReader";
             this.Text = "Регистрация читателя";
+            this.Load += new System.EventHandler(this.registerReader_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -25,7 +25,6 @@ namespace Aworkplace.Views
                 {
                     string outputLiterature = "\n" + allLiteratures[dataLiterature.SelectedCells[0].RowIndex].ID.ToString() + ";" + allReaders[dataReaders.SelectedCells[0].RowIndex].IDReaderCard.ToString() + ";" + dateOutputLiterature.Value.ToShortDateString();
                     File.AppendAllText(LiteratureFromReader.pathFile, outputLiterature);
-
                     allLiteratures[dataLiterature.SelectedCells[0].RowIndex].COUNT--;
                     allLiteratures[dataLiterature.SelectedCells[0].RowIndex].UpdateLiterature();
                     f.readFromFileForData(ref dataLiterature, ref dataReaders, ref allLiteratures, ref allReaders, ref typeLiterature);

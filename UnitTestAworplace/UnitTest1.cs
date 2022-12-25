@@ -16,6 +16,9 @@ namespace UnitTestAworplace
             int selectedItem = 1;
             string place = "Работа";
 
+
+            TypeLiterature
+
             Assert.AreEqual(lastName, firstName);
         }
     }

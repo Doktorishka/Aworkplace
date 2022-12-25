@@ -61,6 +61,10 @@ namespace Aworkplace
             listInputLiterature list = new listInputLiterature();
 
             list.ShowDialog();
+
+            if (list.DialogResult == DialogResult.) { 
+                
+            }
         }
     }
 }
