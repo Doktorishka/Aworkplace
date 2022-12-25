@@ -61,6 +61,7 @@
             this.lastNameReader.Name = "lastNameReader";
             this.lastNameReader.Size = new System.Drawing.Size(345, 27);
             this.lastNameReader.TabIndex = 1;
+            this.lastNameReader.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.function_KeyPress);
             // 
             // label2
             // 
@@ -77,6 +78,7 @@
             this.firstNameReader.Name = "firstNameReader";
             this.firstNameReader.Size = new System.Drawing.Size(345, 27);
             this.firstNameReader.TabIndex = 1;
+            this.firstNameReader.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.function_KeyPress);
             // 
             // label3
             // 
@@ -93,6 +95,7 @@
             this.patronomycReader.Name = "patronomycReader";
             this.patronomycReader.Size = new System.Drawing.Size(345, 27);
             this.patronomycReader.TabIndex = 1;
+            this.patronomycReader.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.function_KeyPress);
             // 
             // dateBirthReader
             // 
@@ -142,6 +145,7 @@
             this.typeObjectReader.Name = "typeObjectReader";
             this.typeObjectReader.Size = new System.Drawing.Size(345, 27);
             this.typeObjectReader.TabIndex = 1;
+            this.typeObjectReader.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.function_KeyPress);
             // 
             // registrationButton
             // 
@@ -215,6 +219,8 @@
             this.Controls.Add(this.errorLabelFirstName);
             this.Controls.Add(this.errorLabelLastName);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "registerReader";
             this.Text = "Регистрация читателя";
             this.ResumeLayout(false);

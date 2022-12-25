@@ -17,7 +17,8 @@ namespace Aworkplace.Views
         public listDebtorReader()
         {
             InitializeComponent();
-
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             f.readFromFileForData(ref dataDebtor, ref allReaders, ref allLiteratures, ref typeLiterature, ref incorrectOutput, out idCard, out idLiterature);
         }
 

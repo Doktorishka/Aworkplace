@@ -19,6 +19,8 @@ namespace Aworkplace.Views
         public registerLiterature()
         {
             InitializeComponent();
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             string[] allType = File.ReadAllLines("../../../Files/TypeLiterature.txt");
             foreach (string type in allType)
             {
@@ -90,6 +92,12 @@ namespace Aworkplace.Views
             else {
                 MessageBox.Show("Заполните обязательные поля!");
             }
+        }
+
+        private void function_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar)) return;
+            else e.Handled = true;
         }
     }
 }

@@ -12,7 +12,9 @@ namespace Aworkplace.Views
         public listReaders()
         {
             InitializeComponent();
-
+            dataReaders.ClearSelection();
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             string[] allType = File.ReadAllLines(TypeReader.pathFile);
             foreach (string type in allType)
             {
@@ -38,14 +40,19 @@ namespace Aworkplace.Views
 
         private void deleteSelectedItemButton_Click(object sender, EventArgs e)
         {
-            if (dataReaders.SelectedCells[0].RowIndex != -1)
-            {
-                allReaders[dataReaders.SelectedCells[0].RowIndex].DeleteReader();
-                f.readFromFileForData(ref dataReaders, ref allReaders, ref typeReader);
-            }
-            else {
-                MessageBox.Show("Выделите одну строку в таблице!");
-            }
+            var result = MessageBox.Show("Вы точно хотите удалить читателя?", "Внимание",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes) {
+                if (dataReaders.SelectedCells[0].RowIndex != -1)
+                {
+                    allReaders[dataReaders.SelectedCells[0].RowIndex].DeleteReader();
+                    f.readFromFileForData(ref dataReaders, ref allReaders, ref typeReader);
+                }
+                else
+                {
+                    MessageBox.Show("Выделите одну строку в таблице!");
+                }
+            }          
         }
     }
 }

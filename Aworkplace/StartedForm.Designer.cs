@@ -66,7 +66,7 @@
             this.listingBookFromButton.Name = "listingBookFromButton";
             this.listingBookFromButton.Size = new System.Drawing.Size(238, 54);
             this.listingBookFromButton.TabIndex = 0;
-            this.listingBookFromButton.Text = "Список экземпляров";
+            this.listingBookFromButton.Text = "Список литературы";
             this.listingBookFromButton.UseVisualStyleBackColor = true;
             this.listingBookFromButton.Click += new System.EventHandler(this.listingBookFromButton_Click);
             // 
@@ -81,7 +81,7 @@
             this.usedBookFromButton.Name = "usedBookFromButton";
             this.usedBookFromButton.Size = new System.Drawing.Size(238, 54);
             this.usedBookFromButton.TabIndex = 0;
-            this.usedBookFromButton.Text = "Экземпляр в пользовании";
+            this.usedBookFromButton.Text = "Литература в пользовании";
             this.usedBookFromButton.UseVisualStyleBackColor = true;
             this.usedBookFromButton.Click += new System.EventHandler(this.usedBookFromButton_Click);
             // 
@@ -97,7 +97,7 @@
             this.registerBookFromButton.Name = "registerBookFromButton";
             this.registerBookFromButton.Size = new System.Drawing.Size(238, 54);
             this.registerBookFromButton.TabIndex = 0;
-            this.registerBookFromButton.Text = "Регистрация экземпляра";
+            this.registerBookFromButton.Text = "Регистрация литературы";
             this.registerBookFromButton.UseVisualStyleBackColor = false;
             this.registerBookFromButton.Click += new System.EventHandler(this.registerBookFromButton_Click);
             // 
@@ -169,7 +169,7 @@
             this.issueBookFormButton.Name = "issueBookFormButton";
             this.issueBookFormButton.Size = new System.Drawing.Size(238, 54);
             this.issueBookFormButton.TabIndex = 0;
-            this.issueBookFormButton.Text = "Выдать книгу";
+            this.issueBookFormButton.Text = "Выдать литературу";
             this.issueBookFormButton.UseVisualStyleBackColor = true;
             this.issueBookFormButton.Click += new System.EventHandler(this.issueBookFormButton_Click);
             // 
@@ -184,7 +184,7 @@
             this.acceptBookFormButton.Name = "acceptBookFormButton";
             this.acceptBookFormButton.Size = new System.Drawing.Size(238, 54);
             this.acceptBookFormButton.TabIndex = 0;
-            this.acceptBookFormButton.Text = "Принять книгу";
+            this.acceptBookFormButton.Text = "Принять литературу";
             this.acceptBookFormButton.UseVisualStyleBackColor = true;
             this.acceptBookFormButton.Click += new System.EventHandler(this.acceptBookFormButton_Click);
             // 
@@ -208,6 +208,8 @@
             this.Controls.Add(this.issueBookFormButton);
             this.Controls.Add(this.readerGroupBox);
             this.Controls.Add(this.bookGroupBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "StartedForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Главная";

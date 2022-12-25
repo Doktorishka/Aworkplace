@@ -46,7 +46,7 @@
             this.addLiteratureButton.Name = "addLiteratureButton";
             this.addLiteratureButton.Size = new System.Drawing.Size(238, 54);
             this.addLiteratureButton.TabIndex = 7;
-            this.addLiteratureButton.Text = "Зарегистрировать экземпляр";
+            this.addLiteratureButton.Text = "Зарегистрировать литературу";
             this.addLiteratureButton.UseVisualStyleBackColor = true;
             this.addLiteratureButton.Click += new System.EventHandler(this.addLiteratureButton_Click);
             // 
@@ -76,7 +76,7 @@
             this.deleteSelectedItemButton.Name = "deleteSelectedItemButton";
             this.deleteSelectedItemButton.Size = new System.Drawing.Size(238, 54);
             this.deleteSelectedItemButton.TabIndex = 5;
-            this.deleteSelectedItemButton.Text = "Удалить экземпляр";
+            this.deleteSelectedItemButton.Text = "Удалить литературу";
             this.deleteSelectedItemButton.UseVisualStyleBackColor = true;
             this.deleteSelectedItemButton.Click += new System.EventHandler(this.deleteSelectedItemButton_Click);
             // 
@@ -88,6 +88,7 @@
             this.dataLiterature.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataLiterature.Location = new System.Drawing.Point(12, 12);
             this.dataLiterature.Name = "dataLiterature";
+            this.dataLiterature.ReadOnly = true;
             this.dataLiterature.RowHeadersWidth = 51;
             this.dataLiterature.RowTemplate.Height = 29;
             this.dataLiterature.Size = new System.Drawing.Size(870, 342);

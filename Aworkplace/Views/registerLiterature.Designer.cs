@@ -77,6 +77,7 @@
             this.typeObjectLiterature.Name = "typeObjectLiterature";
             this.typeObjectLiterature.Size = new System.Drawing.Size(345, 27);
             this.typeObjectLiterature.TabIndex = 12;
+            this.typeObjectLiterature.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.function_KeyPress);
             // 
             // label5
             // 
@@ -111,6 +112,7 @@
             this.nameAuthor.Name = "nameAuthor";
             this.nameAuthor.Size = new System.Drawing.Size(345, 27);
             this.nameAuthor.TabIndex = 14;
+            this.nameAuthor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.function_KeyPress);
             // 
             // label2
             // 
@@ -127,6 +129,7 @@
             this.nameLiterature.Name = "nameLiterature";
             this.nameLiterature.Size = new System.Drawing.Size(345, 27);
             this.nameLiterature.TabIndex = 15;
+            this.nameLiterature.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.function_KeyPress);
             // 
             // errorLabelFirstName
             // 

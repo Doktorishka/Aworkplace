@@ -15,7 +15,8 @@ namespace Aworkplace.Views
         public listInputLiterature()
         {
             InitializeComponent();
-
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             dataLiterature.ColumnCount = 5;
             dataLiterature.Columns[0].HeaderText = "ИД";
             dataLiterature.Columns[1].HeaderText = "Наименование экземпляра";

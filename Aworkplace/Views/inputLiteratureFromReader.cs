@@ -13,7 +13,8 @@ namespace Aworkplace.Views
         public inputLiteratureFromReader()
         {
             InitializeComponent();
-
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             dataReader.ColumnCount = 1;
             dataReader.Columns[0].HeaderText = "ФИО";
 

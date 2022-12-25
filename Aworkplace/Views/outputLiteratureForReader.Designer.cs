@@ -80,7 +80,7 @@
             this.registerOutputButton.Name = "registerOutputButton";
             this.registerOutputButton.Size = new System.Drawing.Size(238, 54);
             this.registerOutputButton.TabIndex = 8;
-            this.registerOutputButton.Text = "Выдать книгу";
+            this.registerOutputButton.Text = "Выдать литературу";
             this.registerOutputButton.UseVisualStyleBackColor = true;
             this.registerOutputButton.Click += new System.EventHandler(this.registerOutputButton_Click);
             // 

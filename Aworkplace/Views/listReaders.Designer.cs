@@ -43,6 +43,7 @@
             this.dataReaders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataReaders.Location = new System.Drawing.Point(12, 12);
             this.dataReaders.Name = "dataReaders";
+            this.dataReaders.ReadOnly = true;
             this.dataReaders.RowHeadersWidth = 51;
             this.dataReaders.RowTemplate.Height = 29;
             this.dataReaders.Size = new System.Drawing.Size(870, 342);

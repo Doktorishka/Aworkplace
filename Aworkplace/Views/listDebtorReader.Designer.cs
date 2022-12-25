@@ -57,7 +57,7 @@
             this.acceptBookFormButton.Name = "acceptBookFormButton";
             this.acceptBookFormButton.Size = new System.Drawing.Size(238, 54);
             this.acceptBookFormButton.TabIndex = 1;
-            this.acceptBookFormButton.Text = "Принять книгу";
+            this.acceptBookFormButton.Text = "Принять литературу";
             this.acceptBookFormButton.UseVisualStyleBackColor = true;
             // 
             // listDebtorReader

@@ -12,6 +12,8 @@ namespace Aworkplace.Views
         public outputLiteratureForReader()
         {
             InitializeComponent();
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             f.readFromFileForData(ref dataLiterature, ref dataReaders, ref allLiteratures, ref allReaders, ref typeLiterature);
         }
 

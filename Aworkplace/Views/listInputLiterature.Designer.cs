@@ -57,7 +57,7 @@
             this.issuesBookFormButton.Name = "issuesBookFormButton";
             this.issuesBookFormButton.Size = new System.Drawing.Size(238, 54);
             this.issuesBookFormButton.TabIndex = 2;
-            this.issuesBookFormButton.Text = "Выдать книгу";
+            this.issuesBookFormButton.Text = "Выдать литературу";
             this.issuesBookFormButton.UseVisualStyleBackColor = true;
             this.issuesBookFormButton.Click += new System.EventHandler(this.issuesBookFormButton_Click);
             // 

@@ -73,7 +73,7 @@
             this.registerInputButton.Name = "registerInputButton";
             this.registerInputButton.Size = new System.Drawing.Size(238, 54);
             this.registerInputButton.TabIndex = 9;
-            this.registerInputButton.Text = "Принять книгу";
+            this.registerInputButton.Text = "Принять литературу";
             this.registerInputButton.UseVisualStyleBackColor = true;
             this.registerInputButton.Click += new System.EventHandler(this.registerInputButton_Click);
             // 
@@ -86,6 +86,8 @@
             this.Controls.Add(this.registerInputButton);
             this.Controls.Add(this.dataOutputLiterature);
             this.Controls.Add(this.dataReader);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "inputLiteratureFromReader";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "inputLiteratureFromReader";
