@@ -27,8 +27,8 @@
         public override void AddReader()
         {
             string lastLine = File.ReadLines(Reader.pathFile).Last();
-            string[] ident = lastLine.Split(' ');
-            string reader = "\n" + ID.ToString() + " " + IDReaderCard.ToString() + " " + LastName + " " + FirstName + " " + Patronomyc + " " + DateBirth.Value.ToShortDateString() + " " + identificatorType.ToString() + " " + typeObject;
+            string[] ident = lastLine.Split(';');
+            string reader = "\n" + ID.ToString() + ";" + IDReaderCard.ToString() + ";" + LastName + ";" + FirstName + ";" + Patronomyc + ";" + DateBirth.Value.ToShortDateString() + ";" + identificatorType.ToString() + ";" + typeObject;
             File.AppendAllText(Reader.pathFile, reader);
         }
         public override void UpdateReader()
@@ -37,10 +37,10 @@
 
             for (int i = 0; i < allReader.Length; i++)
             {
-                string[] line = allReader[0].Split(' ');
+                string[] line = allReader[0].Split(';');
                 if (this.ID == Convert.ToInt32(line[0]))
                 {
-                    allReader[i] = "\n" + ID.ToString() + " " + IDReaderCard.ToString() + " " + LastName + " " + FirstName + " " + Patronomyc + " " + DateBirth.Value.ToShortDateString() + " "+identificatorType.ToString() + " " + typeObject;
+                    allReader[i] = "\n" + ID.ToString() + ";" + IDReaderCard.ToString() + ";" + LastName + ";" + FirstName + ";" + Patronomyc + ";" + DateBirth.Value.ToShortDateString() + " "+identificatorType.ToString() + ";" + typeObject;
                 }
             }
             File.WriteAllLines(Reader.pathFile, allReader);

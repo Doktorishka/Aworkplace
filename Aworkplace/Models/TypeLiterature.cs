@@ -17,8 +17,8 @@
         public override void AddLiterature()
         {
             string lastLine = File.ReadLines(Literature.pathFile).Last();
-            string[] ident = lastLine.Split(' ');
-            string literature = "\n" + (Convert.ToInt32(ident[0]) + 1).ToString() + " " + Author + " " + Title + " " + COUNT.ToString() + " " + DateOutput.ToString() + " " + idType.ToString() + " " + WhoisAutorPrint;
+            string[] ident = lastLine.Split(';');
+            string literature = "\n" + (Convert.ToInt32(ident[0]) + 1).ToString() + ";" + Author + ";" + Title + ";" + COUNT.ToString() + ";" + DateOutput.ToString() + ";" + idType.ToString() + ";" + WhoisAutorPrint;
             File.AppendAllText(Literature.pathFile, literature);
         }
 
@@ -28,10 +28,10 @@
 
             for (int i = 0; i < allReader.Length; i++)
             {
-                string[] line = allReader[0].Split(' ');
+                string[] line = allReader[0].Split(';');
                 if (ID == Convert.ToInt32(line[0]))
                 {
-                    allReader[i] = ID.ToString() + " " + Title + " " + Author + " " + COUNT.ToString() + " " + DateOutput.Value.ToShortDateString() + " " + idType.ToString() + " " + WhoisAutorPrint;
+                    allReader[i] = ID.ToString() + ";" + Title + ";" + Author + ";" + COUNT.ToString() + ";" + DateOutput.Value.ToShortDateString() + ";" + idType.ToString() + ";" + WhoisAutorPrint;
                 }
             }
             File.WriteAllLines(Literature.pathFile, allReader);

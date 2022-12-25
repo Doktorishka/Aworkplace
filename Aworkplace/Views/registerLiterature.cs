@@ -24,7 +24,7 @@ namespace Aworkplace.Views
             string[] allType = File.ReadAllLines("../../../Files/TypeLiterature.txt");
             foreach (string type in allType)
             {
-                string[] objectType = type.Split(" ");
+                string[] objectType = type.Split(";");
                 typeLiterature.Items.Add(objectType[1]);
             }
 

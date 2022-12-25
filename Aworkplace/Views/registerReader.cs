@@ -14,7 +14,7 @@ namespace Aworkplace.Views
             string[] allType = File.ReadAllLines("../../../Files/TypeReader.txt");
             foreach (string type in allType)
             {
-                string[] objectType = type.Split(" ");
+                string[] objectType = type.Split(";");
                 typeReader.Items.Add(objectType[1]);
             }
         }

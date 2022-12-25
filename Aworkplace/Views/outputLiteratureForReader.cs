@@ -23,7 +23,7 @@ namespace Aworkplace.Views
             {
                 if (allLiteratures[dataLiterature.SelectedCells[0].RowIndex].COUNT != 0)
                 {
-                    string outputLiterature = "\n" + allLiteratures[dataLiterature.SelectedCells[0].RowIndex].ID.ToString() + " " + allReaders[dataReaders.SelectedCells[0].RowIndex].IDReaderCard.ToString() + " " + dateOutputLiterature.Value.ToShortDateString();
+                    string outputLiterature = "\n" + allLiteratures[dataLiterature.SelectedCells[0].RowIndex].ID.ToString() + ";" + allReaders[dataReaders.SelectedCells[0].RowIndex].IDReaderCard.ToString() + ";" + dateOutputLiterature.Value.ToShortDateString();
                     File.AppendAllText(LiteratureFromReader.pathFile, outputLiterature);
 
                     allLiteratures[dataLiterature.SelectedCells[0].RowIndex].COUNT--;

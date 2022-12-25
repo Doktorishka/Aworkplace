@@ -44,8 +44,8 @@ namespace Aworkplace.Models
         public virtual void AddReader()
         {
             string lastLine = File.ReadLines("../../../Files/Readers.txt").Last();
-            string[] ident = lastLine.Split(' ');
-            string reader = ("\n" + ID.ToString() + " " + IDReaderCard.ToString() + " " + lastName + " " + firstName + " " + patronomyc + " " + dateBirth.Value.ToShortDateString() + " 0 undefine");
+            string[] ident = lastLine.Split(';');
+            string reader = ("\n" + ID.ToString() + ";" + IDReaderCard.ToString() + ";" + lastName + ";" + firstName + ";" + patronomyc + ";" + dateBirth.Value.ToShortDateString() + " 0 undefine");
             File.AppendAllText("../../../Files/Readers.txt", reader);
         }
 
@@ -55,7 +55,7 @@ namespace Aworkplace.Models
             string[] allReader = File.ReadAllLines("../../../Files/Readers.txt");
             foreach (string readerString in allReader)
             {
-                string[] line = readerString.Split(' ');
+                string[] line = readerString.Split(';');
                 if (id == Convert.ToInt32(line[0]))
                 {
                     findstring = readerString;
@@ -67,7 +67,7 @@ namespace Aworkplace.Models
                 string[] allReaderLiterature = File.ReadAllLines("../../../Files/OutputLiterature.txt");
                 foreach (var line in allReader)
                 {
-                    string[] lineSplit = line.Split(' ');
+                    string[] lineSplit = line.Split(';');
                     if (Convert.ToInt32(lineSplit[0]) == ID)
                     {
                         allReader = allReader.Where(x => x != line).ToArray();
@@ -81,9 +81,9 @@ namespace Aworkplace.Models
             string[] allReader = File.ReadAllLines("../../../Files/Readers.txt");
 
             for (int i = 0; i < allReader.Length; i++) {
-                string[] line = allReader[0].Split(' ');
+                string[] line = allReader[0].Split(';');
                 if (id == Convert.ToInt32(line[0])) {
-                    allReader[i] = id.ToString() + " " + lastName + " " + firstName + " " + patronomyc + " " + dateBirth.Value.ToShortDateString() + " 0 undefine";
+                    allReader[i] = id.ToString() + ";" + lastName + ";" + firstName + ";" + patronomyc + ";" + dateBirth.Value.ToShortDateString() + " 0 undefine";
                 }
             }
             File.WriteAllLines("../../../Files/Readers.txt", allReader);
@@ -92,7 +92,7 @@ namespace Aworkplace.Models
         public int getLastIndex()
         {
             string lastLine = File.ReadLines("../../../Files/Readers.txt").Last();
-            string[] ident = lastLine.Split(' ');
+            string[] ident = lastLine.Split(';');
             return Convert.ToInt32(ident[0]);
         }
     }

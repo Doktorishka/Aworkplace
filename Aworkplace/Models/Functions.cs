@@ -16,7 +16,7 @@ namespace Aworkplace.Models
             string[] allLiterature = File.ReadAllLines(Literature.pathFile);
             foreach (string literString in allLiterature)
             {
-                string[] line = literString.Split(' ');
+                string[] line = literString.Split(';');
 
                 TypeLiterature tl = new TypeLiterature
                 {
@@ -52,7 +52,7 @@ namespace Aworkplace.Models
             string[] allType = File.ReadAllLines(path);
             foreach (string t in allType)
             {
-                string[] objectType = t.Split(" ");
+                string[] objectType = t.Split(";");
                 type.Add(Convert.ToInt32(objectType[0]), objectType[1]);
             }
             return type;
@@ -68,7 +68,7 @@ namespace Aworkplace.Models
 
             foreach (string readerString in allReaders)
             {
-                string[] line = readerString.Split(' ');
+                string[] line = readerString.Split(';');
 
                 TypeReader tr = new TypeReader()
                 {
@@ -247,7 +247,7 @@ namespace Aworkplace.Models
 
             for (int i = 0; i < dataReader.RowCount; i++)
             {
-                string fio = readers[i].LastName + " " + readers[i].FirstName + " " + readers[i].Patronomyc;
+                string fio = readers[i].LastName + ";" + readers[i].FirstName + ";" + readers[i].Patronomyc;
                 dataReader.Rows[i].Cells[0].Value = fio;
                 dataReader.Rows[i].HeaderCell.Value = readers[i].IDReaderCard.ToString();
             }
@@ -277,7 +277,7 @@ namespace Aworkplace.Models
 
             foreach (var all in allOutputLiterature)
             {
-                string[] line = all.Split(' ');
+                string[] line = all.Split(';');
                 if (Convert.ToDateTime(line[2]) < DateTime.Now)
                 {
                     Output.Add(all);
@@ -287,7 +287,7 @@ namespace Aworkplace.Models
             foreach (var incorrect in Output)
             {
                 data.RowCount++;
-                string[] line = incorrect.Split(" ");
+                string[] line = incorrect.Split(";");
                 foreach (var l in literature)
                 {
                     if (Convert.ToInt32(line[0]) == l.ID)
@@ -300,7 +300,7 @@ namespace Aworkplace.Models
                 {
                     if (Convert.ToInt32(line[1]) == r.IDReaderCard)
                     {
-                        string fio = r.LastName + " " + r.FirstName + " " + r.Patronomyc;
+                        string fio = r.LastName + ";" + r.FirstName + ";" + r.Patronomyc;
                         data.Rows[data.RowCount - 1].Cells[0].Value = fio;
                         idCard.Add(data.RowCount - 1, r.IDReaderCard);
                     }

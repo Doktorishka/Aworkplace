@@ -26,7 +26,7 @@ namespace Aworkplace.Views
             string[] allType = File.ReadAllLines("../../../Files/TypeLiterature.txt");
             foreach (string type in allType)
             {
-                string[] objectType = type.Split(" ");
+                string[] objectType = type.Split(";");
                 typeLiterature.Add(Convert.ToInt32(objectType[0]), objectType[1]);
             }
 
@@ -41,7 +41,7 @@ namespace Aworkplace.Views
             string[] allLiterature = File.ReadAllLines("../../../Files/Literature.txt");
             foreach (string literString in allLiterature)
             {
-                string[] line = literString.Split(' ');
+                string[] line = literString.Split(';');
 
                 TypeLiterature tl = new TypeLiterature();
 
@@ -61,7 +61,7 @@ namespace Aworkplace.Views
             string[] allReader = File.ReadAllLines("../../../Files/Readers.txt");
             foreach (string readerString in allReader)
             {
-                string[] line = readerString.Split(' ');
+                string[] line = readerString.Split(';');
 
                 TypeReader tr = new TypeReader();
 
@@ -79,7 +79,7 @@ namespace Aworkplace.Views
 
             for (int i = 0; i < dataReader.RowCount; i++)
             {
-                string fio = allReaders[i].LastName + " " + allReaders[i].FirstName + " " + allReaders[i].Patronomyc;
+                string fio = allReaders[i].LastName + ";" + allReaders[i].FirstName + ";" + allReaders[i].Patronomyc;
                 dataReader.Rows[i].Cells[0].Value = fio;
                 dataReader.Rows[i].HeaderCell.Value = allReaders[i].IDReaderCard.ToString();
             }
@@ -88,7 +88,7 @@ namespace Aworkplace.Views
 
             foreach (var all in allOutputLiterature) {
 
-                string[] line = all.Split(" ");
+                string[] line = all.Split(";");
 
                 List<string> lineCol= new List<string>();
 
@@ -129,7 +129,7 @@ namespace Aworkplace.Views
                 string[] allInputLiterature = File.ReadAllLines("../../../Files/OutputLiterature.txt");
 
                 for (int i = 0; i < allInputLiterature.Length; i++) {
-                    string[] line = allInputLiterature[i].Split(' ');
+                    string[] line = allInputLiterature[i].Split(';');
 
                     int io = (int)dataOutputLiterature.Rows[dataOutputLiterature.SelectedCells[0].RowIndex].Cells[0].Value - 1;
 

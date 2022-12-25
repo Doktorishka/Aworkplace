@@ -25,24 +25,24 @@ namespace Aworkplace.Models
 
             for (int i = 0; i < allReader.Length; i++)
             {
-                string[] line = allReader[0].Split(' ');
+                string[] line = allReader[0].Split(';');
                 if (this.ID == Convert.ToInt32(line[0]))
                 {
-                    allReader[i] = ID.ToString() + " " + literature.ID + " " + reader.ID + " " + DateInput + " " + dateOutput + " " + idInput.ToString();
+                    allReader[i] = ID.ToString() + ";" + literature.ID + ";" + reader.ID + ";" + DateInput + ";" + dateOutput + ";" + idInput.ToString();
                 }
             }
             File.WriteAllLines(Reader.pathFile, allReader);
 
             string lastLine = File.ReadLines(pathFile).Last();
-            string[] ident = lastLine.Split(' ');
+            string[] ident = lastLine.Split(';');
         }
 
         public void outputLiterature() //Add()
         {
             idInput = true;
             string lastLine = File.ReadLines(pathFile).Last();
-            string[] ident = lastLine.Split(' ');
-            string output = (Convert.ToInt32(ident[0]) + 1).ToString() + " " + literature.ID + " " + reader.ID + " " + DateTime.Now.ToShortDateString() + " " + dateOutput + " " + idInput.ToString();
+            string[] ident = lastLine.Split(';');
+            string output = (Convert.ToInt32(ident[0]) + 1).ToString() + ";" + literature.ID + ";" + reader.ID + ";" + DateTime.Now.ToShortDateString() + ";" + dateOutput + ";" + idInput.ToString();
             File.AppendAllText(pathFile, output);
         }
 

@@ -27,7 +27,7 @@ namespace Aworkplace.Views
             string[] allType = File.ReadAllLines("../../../Files/TypeLiterature.txt");
             foreach (string type in allType)
             {
-                string[] objectType = type.Split(" ");
+                string[] objectType = type.Split(";");
                 typeLiterature.Add(Convert.ToInt32(objectType[0]), objectType[1]);
             }
             readFromFileForData();
@@ -42,7 +42,7 @@ namespace Aworkplace.Views
             string[] allLiterature = File.ReadAllLines("../../../Files/Literature.txt");
             foreach (string literString in allLiterature)
             {
-                string[] line = literString.Split(' ');
+                string[] line = literString.Split(';');
 
                 TypeLiterature tl = new TypeLiterature
                 {
@@ -61,7 +61,7 @@ namespace Aworkplace.Views
             string[] allReader = File.ReadAllLines("../../../Files/Readers.txt");
             foreach (string readerString in allReader)
             {
-                string[] line = readerString.Split(' ');
+                string[] line = readerString.Split(';');
 
                 TypeReader tr = new TypeReader
                 {
@@ -80,7 +80,7 @@ namespace Aworkplace.Views
 
             foreach (var all in allOutputLiterature)
             {
-                string[] line = all.Split(' ');
+                string[] line = all.Split(';');
                 if (Convert.ToDateTime(line[2]) < DateTime.Now)
                 {
                     incorrectOutput.Add(all);
@@ -89,13 +89,13 @@ namespace Aworkplace.Views
 
             foreach (var incorrect in incorrectOutput) {
                 
-                string[] line = incorrect.Split(' ');
+                string[] line = incorrect.Split(';');
                 foreach(var l in allLiteratures)
                 {
                     foreach (var r in allReaders)
                     if (Convert.ToInt32(line[0]) == l.ID && Convert.ToInt32(line[1]) == r.IDReaderCard) {
                             dataLiterature.RowCount++;
-                            string fio = r.LastName + " " + r.FirstName + " " + r.Patronomyc;
+                            string fio = r.LastName + ";" + r.FirstName + ";" + r.Patronomyc;
                         dataLiterature.Rows[dataLiterature.RowCount - 1].Cells[0].Value = l.ID;
                         dataLiterature.Rows[dataLiterature.RowCount - 1].Cells[1].Value = l.Title;
                         dataLiterature.Rows[dataLiterature.RowCount - 1].Cells[2].Value = l.Author;

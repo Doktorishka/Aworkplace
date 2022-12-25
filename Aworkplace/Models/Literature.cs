@@ -30,8 +30,8 @@ namespace Aworkplace.Models
         public virtual void AddLiterature()
         {
             string lastLine = File.ReadLines(pathFile).Last();
-            string[] ident = lastLine.Split(' ');
-            string literature = (Convert.ToInt32(ident[0]) + 1).ToString() + " " + author + " " + title + " " + numInstance.ToString() + " " + dateOutputLiterature.ToString() + " 0 undefined\n";
+            string[] ident = lastLine.Split(';');
+            string literature = (Convert.ToInt32(ident[0]) + 1).ToString() + ";" + author + ";" + title + ";" + numInstance.ToString() + ";" + dateOutputLiterature.ToString() + " 0 undefined\n";
             File.AppendAllText(pathFile, literature);
         }
 
@@ -42,7 +42,7 @@ namespace Aworkplace.Models
             string[] allLiterature = File.ReadAllLines(pathFile);
             foreach (string readerString in allLiterature)
             {
-                string[] line = readerString.Split(' ');
+                string[] line = readerString.Split(';');
                 if (id == Convert.ToInt32(line[0]))
                 {
                     findstring = readerString;
@@ -58,10 +58,10 @@ namespace Aworkplace.Models
 
             for (int i = 0; i < allReader.Length; i++)
             {
-                string[] line = allReader[0].Split(' ');
+                string[] line = allReader[0].Split(';');
                 if (id == Convert.ToInt32(line[0]))
                 {
-                    allReader[i] = id.ToString() + " " + author + " " + title + " " + numInstance.ToString() + " " + dateOutputLiterature.ToString() + " 0 undefined";
+                    allReader[i] = id.ToString() + ";" + author + ";" + title + ";" + numInstance.ToString() + ";" + dateOutputLiterature.ToString() + " 0 undefined";
                 }
             }
             File.WriteAllLines(pathFile, allReader);
@@ -70,7 +70,7 @@ namespace Aworkplace.Models
         public int getLastId()
         {
             string lastLine = File.ReadLines(pathFile).Last();
-            string[] ident = lastLine.Split(' ');
+            string[] ident = lastLine.Split(';');
             return Convert.ToInt32(ident[0]);
         }
     }

@@ -35,7 +35,7 @@ namespace Aworkplace.Views
                 int idLiteratureValue = (int)idLiterature.FirstOrDefault(x => x.Key == dataDebtor.SelectedCells[0].RowIndex).Value;
 
                 foreach (var all in allInputLiterature) {
-                    string[] line = all.Split(' ');
+                    string[] line = all.Split(';');
                     if (Convert.ToInt32(line[0]) == idLiteratureValue && Convert.ToInt32(line[1]) == idCardINT) {
                         findstring = all;
                     }
